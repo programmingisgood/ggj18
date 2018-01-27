@@ -56,9 +56,14 @@ public class DictionaryTester : MonoBehaviour
 		}
 	}
 
+	public bool GetIsWordValid(string word)
+	{
+		return words.ContainsKey(word);
+	}
+
 	public List<string> GetWordSynonyms(string word)
 	{
-		if (words.ContainsKey(word))
+		if (GetIsWordValid(word))
 		{
 			return words[word];
 		}
