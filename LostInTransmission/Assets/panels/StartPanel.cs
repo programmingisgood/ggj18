@@ -28,8 +28,8 @@ public class StartPanel : MonoBehaviour
 		begin.gameObject.SetActive(false);
 		beginText.gameObject.SetActive(false);
 
-		name2.Select();
- 		name2.ActivateInputField();
+		//name2.Select();
+ 		//name2.ActivateInputField();
 	}
 
 	void TaskOnBegin()
@@ -62,7 +62,7 @@ public class StartPanel : MonoBehaviour
 
 		if (readyToPlay)
 		{
-			beginText.text = "Very good. " + name2.text + ", please avert your vision and then we may";
+			beginText.text = "Very good.\n" + name2.text + ", please avert your vision and then we may";
 		}
 	}
 

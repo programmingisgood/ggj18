@@ -7,7 +7,7 @@ public class Censor : MonoBehaviour
 {
 	public DictionaryTester dict;
 
-	public int maxWords = 5;
+	public int maxChars = 30;
 	public float chanceOfRemoval = 0.5f;
 	public float chanceOfSwap = 0.5f;
 	public float chanceOfSynonym = 0.3f;
@@ -32,7 +32,7 @@ public class Censor : MonoBehaviour
 		}
 
 		// Verify length of message.
-		int numberToRemove = wordsList.Count - maxWords;
+		/*int numberToRemove = wordsList.Count - maxWords;
 		while (numberToRemove > 0)
 		{
 			int trashIndex = Random.Range(0, wordsList.Count);
@@ -43,7 +43,7 @@ public class Censor : MonoBehaviour
 			Debug.Log("Too many, trashing " + wordsList[trashIndex]);
 			wordsList[trashIndex] = censorText;
 			numberToRemove--;
-		}
+		}*/
 
 		// Verify each word is a real word.
 		for (int w = wordsList.Count - 1; w >= 0; w--)

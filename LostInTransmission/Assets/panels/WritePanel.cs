@@ -28,8 +28,8 @@ public class WritePanel : MonoBehaviour
 	void InputChanged(string input)
 	{
 		// Check if we should enable the submit button.
-		int numOfWords = 0;
-		string[] words = inputField.text.Split(' ');
+		int numOfChars = inputField.text.Length;
+		/*string[] words = inputField.text.Split(' ');
 		for (int i = 0; i < words.Length; i++)
 		{
 			string word = words[i];
@@ -38,20 +38,14 @@ public class WritePanel : MonoBehaviour
 			{
 				numOfWords++;
 			}
-		}
+		}*/
 
-		wordLimitCurrText.text = numOfWords.ToString();
-		wordLimitMax.text = "/" + censor.maxWords;
-		wordLimitCurrText.color = Color.black;
+		wordLimitCurrText.text = numOfChars.ToString();
+		wordLimitMax.text = "/" + censor.maxChars;
+		wordLimitCurrText.color = (numOfChars > censor.maxChars) ? Color.red : Color.black;
 
-		if (numOfWords >= censor.maxWords)
-		{
-			if (numOfWords > censor.maxWords)
-			{
-				wordLimitCurrText.color = Color.red;
-			}
-			submit.gameObject.SetActive(true);
-		}
+		bool showButton = numOfChars > 0 && numOfChars <= censor.maxChars;
+		submit.gameObject.SetActive(showButton);
 	}
 
 	void OnEnable()
@@ -79,7 +73,7 @@ public class WritePanel : MonoBehaviour
 
 		wordLimitCurrText.color = Color.black;
 		wordLimitCurrText.text = "0";
-		wordLimitMax.text = "/" + censor.maxWords;
+		wordLimitMax.text = "/" + censor.maxChars;
 
 		UnpackBox();
 	}

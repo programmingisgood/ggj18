@@ -370,6 +370,10 @@ Prefab:
       propertyPath: writePanel
       value: 
       objectReference: {fileID: 1647129087}
+    - target: {fileID: 1819523343961498, guid: f7c4a144ef56e604294f83ac1ae2bd9a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f7c4a144ef56e604294f83ac1ae2bd9a, type: 2}
   m_IsPrefabParent: 0
@@ -1479,6 +1483,10 @@ Prefab:
       propertyPath: boxPanel
       value: 
       objectReference: {fileID: 1854710784}
+    - target: {fileID: 1908343368765400, guid: 3aad42492d4a53141bcb7b6592a07f67, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3aad42492d4a53141bcb7b6592a07f67, type: 2}
   m_IsPrefabParent: 0
@@ -1667,10 +1675,10 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 720, y: 1280}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1864,7 +1872,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dict: {fileID: 407336307}
-  maxWords: 5
+  maxChars: 30
   chanceOfRemoval: 0.5
   chanceOfSwap: 0.5
   chanceOfSynonym: 0.3
