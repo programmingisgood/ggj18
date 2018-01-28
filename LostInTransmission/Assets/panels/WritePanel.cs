@@ -133,7 +133,7 @@ public class WritePanel : MonoBehaviour
 			}
 		}
 
-		if (numGoodInBox == 6)
+		if (!gameOver && numGoodInBox == 6)
 		{
 			gameOver = true;
 			playersWon = true;
