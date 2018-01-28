@@ -13,11 +13,21 @@ public class Censor : MonoBehaviour
 	public float chanceOfSynonym = 0.3f;
 	public float chanceOfComrade = 0.01f;
 
+	public class Message
+	{
+		public string beforeCensor;
+		public string afterCensor;
+	}
+	public List<Message> messageHistory = new List<Message>();
+
 	private string censorText = "[CENSORED]";
 	private string comradeText = "comrade";
 
 	public string CleanMessage(string message, List<string> excludeWords)
 	{
+		Message messageInHistory = new Message();
+		messageInHistory.beforeCensor = message;
+
 		List<string> wordsList = new List<string>(message.Split(' '));
 		for (int i = wordsList.Count - 1; i >= 0; i--)
 		{
@@ -194,6 +204,9 @@ public class Censor : MonoBehaviour
 		{
 			cleanMessage += wordsList[f] + " ";
 		}
+
+		messageInHistory.afterCensor = cleanMessage;
+		messageHistory.Add(messageInHistory);
 
 		return cleanMessage;
 	}
