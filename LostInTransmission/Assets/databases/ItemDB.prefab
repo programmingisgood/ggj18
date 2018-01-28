@@ -53,12 +53,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allItems:
   - name: pants
+    sprite: {fileID: 21300000, guid: 4e06d1dee481e4600992631e6de78edc, type: 3}
   - name: bread
+    sprite: {fileID: 21300000, guid: 26f928ae578fe410292a74eb4fcd90e6, type: 3}
   - name: apple
+    sprite: {fileID: 21300000, guid: 583d8bf54b65b46e9a08fab895555448, type: 3}
   - name: pencil
+    sprite: {fileID: 21300000, guid: cafdb43b8ccc942ec92304e1c0aea723, type: 3}
   - name: tshirt
+    sprite: {fileID: 21300000, guid: 463ec923de63b43c98d6df1ff773d41c, type: 3}
   - name: banana
-  - name: tomato
-  - name: mouse
-  - name: can
-  - name: paper
+    sprite: {fileID: 21300000, guid: 3ee20468ac7f948deae50c770b2199f9, type: 3}
+  - name: joystick
+    sprite: {fileID: 21300000, guid: 2d4a3a37f06564f9b937bf47c108d634, type: 3}
+  - name: vikinghat
+    sprite: {fileID: 21300000, guid: 34b13b44b821c40bf87a12be0d992ed1, type: 3}
+  - name: stapler
+    sprite: {fileID: 21300000, guid: b1136523f9d6d4b5fa7d869ff742f0b7, type: 3}
+  - name: scissors
+    sprite: {fileID: 21300000, guid: c8d229d366ac94d288015638af1e65e3, type: 3}
+  - name: dog
+    sprite: {fileID: 21300000, guid: 7f4352ca9d8df4da1861ef72ffcd10bf, type: 3}
+  - name: 8ball
+    sprite: {fileID: 21300000, guid: 9d8693dacbd314ac883bab3ae1fbaff2, type: 3}
+  - name: book
+    sprite: {fileID: 21300000, guid: 54d1213f4f672490199f409d3fc15946, type: 3}
+  - name: clock
+    sprite: {fileID: 21300000, guid: 3d85c6f0cfea740a98c06d8f8c2d6851, type: 3}
+  - name: controller
+    sprite: {fileID: 21300000, guid: 718967db485d447b59776dfd0da8d5fb, type: 3}
