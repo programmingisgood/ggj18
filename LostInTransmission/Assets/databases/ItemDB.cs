@@ -56,6 +56,11 @@ public class ItemDB : MonoBehaviour
 		}
 	}
 
+	public List<Item> GetGoodItems()
+	{
+		return goodItems;
+	}
+
 	public Item GetGoodItem(int index)
 	{
 		if (!generated)
@@ -64,6 +69,11 @@ public class ItemDB : MonoBehaviour
 		}
 
 		return goodItems[index];
+	}
+
+	public List<Item> GetBadItems()
+	{
+		return badItems;
 	}
 
 	public Item GetBadItem(int index)
@@ -136,6 +146,19 @@ public class ItemDB : MonoBehaviour
 		for (int i = 0; i < itemsInBoxPreviously.Count; i++)
 		{
 			if (itemsInBoxPreviously[i].name == checkItem)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public bool CheckItemWasPacked(Sprite checkItem)
+	{
+		for (int i = 0; i < itemsInBoxPreviously.Count; i++)
+		{
+			if (itemsInBoxPreviously[i].sprite == checkItem)
 			{
 				return true;
 			}

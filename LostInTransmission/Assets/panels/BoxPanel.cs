@@ -11,11 +11,8 @@ public class BoxPanel : MonoBehaviour
 	public List<GameObject> items;
 	public Text messageDisplay;
 	public Button sendButton;
-	public Button boxButton;
 	public Image boxImage;
-	public Text boxText;
 
-	private bool boxOpen = true;
 	private Dictionary<GameObject, ItemDB.Item> itemMap;
 
 	class ButtonPressData
@@ -31,7 +28,6 @@ public class BoxPanel : MonoBehaviour
 	void Start()
 	{
 		sendButton.onClick.AddListener(OnSendIt);
-		boxButton.onClick.AddListener(OnBox);
 
 		for (int g = 0; g < items.Count; g++)
 		{
@@ -44,9 +40,6 @@ public class BoxPanel : MonoBehaviour
 
 	void OnEnable()
 	{
-		boxOpen = true;
-		boxText.text = "Box Open";
-
 		itemMap = new Dictionary<GameObject, ItemDB.Item>();
 		DisplayItems();
 
@@ -66,9 +59,9 @@ public class BoxPanel : MonoBehaviour
 		{
 			GameObject itemGO = items[g];
 			itemGO.SetActive(true);
-			Text item = itemGO.GetComponentsInChildren<Text>()[0];
+			Image item = itemGO.GetComponentsInChildren<Image>()[0];
 			int randomIndex = Random.Range(0, allGameItems.Count);
-			item.text = allGameItems[randomIndex].name;
+			item.sprite = allGameItems[randomIndex].sprite;
 			itemMap[itemGO] = allGameItems[randomIndex];
 			allGameItems.RemoveAt(randomIndex);
 		}
@@ -76,8 +69,8 @@ public class BoxPanel : MonoBehaviour
 		for (int g = 0; g < items.Count; g++)
 		{
 			GameObject itemGO = items[g];
-			Text item = itemGO.GetComponentsInChildren<Text>()[0];
-			if (itemDB.CheckItemWasPacked(item.text))
+			Image itemImage = itemGO.GetComponentsInChildren<Image>()[0];
+			if (itemDB.CheckItemWasPacked(itemImage.sprite))
 			{
 				itemGO.SetActive(false);
 			}
@@ -90,26 +83,13 @@ public class BoxPanel : MonoBehaviour
 		itemGO.SetActive(false);
 		ItemDB.Item itemInDB = itemMap[itemGO];
 		itemDB.AddItemToBox(itemInDB);
+
+		sendButton.gameObject.SetActive(true);
 	}
 
 	void OnSendIt()
 	{
 		gameObject.SetActive(false);
 		passBackPanel.SetActive(true);
-	}
-
-	void OnBox()
-	{
-		boxOpen = !boxOpen;
-		if (boxOpen)
-		{
-			boxText.text = "Box Open";
-			sendButton.gameObject.SetActive(false);
-		}
-		else
-		{
-			boxText.text = "Box Closed";
-			sendButton.gameObject.SetActive(true);
-		}
 	}
 }

@@ -82,3 +82,29 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 3d85c6f0cfea740a98c06d8f8c2d6851, type: 3}
   - name: controller
     sprite: {fileID: 21300000, guid: 718967db485d447b59776dfd0da8d5fb, type: 3}
+  - name: cactus
+    sprite: {fileID: 21300000, guid: 6a55525157ba62440bf769eaffda65fb, type: 3}
+  - name: cat
+    sprite: {fileID: 21300000, guid: 955846fa35a88504e93904d2a3a92f99, type: 3}
+  - name: hammer
+    sprite: {fileID: 21300000, guid: 299509ec63825fe48a974b3cf45ab281, type: 3}
+  - name: ice cream
+    sprite: {fileID: 21300000, guid: 91a3cab3cd04a7e44aa8fe432fb31e0f, type: 3}
+  - name: island
+    sprite: {fileID: 21300000, guid: 2fedeb9f5982042429be76a33469e536, type: 3}
+  - name: shirt
+    sprite: {fileID: 21300000, guid: 463ec923de63b43c98d6df1ff773d41c, type: 3}
+  - name: shovel
+    sprite: {fileID: 21300000, guid: d79769c1068489e449908591d3efeaf1, type: 3}
+  - name: skull
+    sprite: {fileID: 21300000, guid: 32932ef4c0188484e8ec12df5e1b7c85, type: 3}
+  - name: snail
+    sprite: {fileID: 21300000, guid: f49926a49c3f75b40966c81e24065382, type: 3}
+  - name: star
+    sprite: {fileID: 21300000, guid: 5a6c9a1a6ca44ad44bd3443a519f0321, type: 3}
+  - name: sword
+    sprite: {fileID: 21300000, guid: a38a6a6e26be49b4da27249a5c251950, type: 3}
+  - name: volcano
+    sprite: {fileID: 21300000, guid: 1a4adad36fc7af141b9f09b2f39ef0b2, type: 3}
+  - name: whale
+    sprite: {fileID: 21300000, guid: 14d02e0e17abfcb47923540a95c0a30a, type: 3}
