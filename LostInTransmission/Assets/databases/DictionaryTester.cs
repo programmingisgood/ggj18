@@ -10,6 +10,10 @@ using System.IO;
 
 public class DictionaryTester : MonoBehaviour
 {
+	public TextAsset dictionaryAsset;
+
+
+
 	private Dictionary<string, List<string>> words = new Dictionary<string, List<string>>();
 	private StreamReader streamReader;
 	private bool loaded = false;
@@ -20,13 +24,18 @@ public class DictionaryTester : MonoBehaviour
 
 	void Start()
 	{
-		string filePath = Path.Combine(Application.dataPath, "th_en_US_new.dat");
+		/*string filePath = Path.Combine(Application.dataPath, "th_en_US_new.dat");
 		FileStream fileStream = File.Open(filePath, FileMode.Open, FileAccess.Read);
 		BufferedStream bs = new BufferedStream(fileStream);
-		streamReader = new StreamReader(bs);
+		streamReader = new StreamReader(bs);*/
 
-		FileInfo fileInfo = new FileInfo(filePath);
-   		totalBytes = (int) fileInfo.Length;
+		//FileInfo fileInfo = new FileInfo(filePath);
+		//FileInfo fileInfo = new FileInfo(dictionaryAsset.text);
+
+   		//totalBytes = (int) fileInfo.Length;
+		//streamReader = theSourceFile.OpenText();
+
+		totalBytes = dictionaryAsset.text.Length;
 	}
 
 	void Update()
@@ -36,20 +45,31 @@ public class DictionaryTester : MonoBehaviour
 			for (int i = 0; i < 2000; i++)
 			{
 				string line;
-				if ((line = streamReader.ReadLine()) != null)
+				//if ((line = streamReader.ReadLine()) != null)
+				string[] lines = dictionaryAsset.text.Split('\n');
+				Debug.Log(lines[0]);
+				int lineCount = lines.Length;
+				int currentLine = 0;
+				while(currentLine < lineCount)
 				{
+
+				
+					
+					line = lines[currentLine];
 					linesRead++;
 					// + 1 here due to the end line character.
 					bytesRead += line.Length + 1;
 
 					string[] wordData = line.Split('|');
 					string wordStr = wordData[0];
+					//Debug.Log(wordStr.Length);
+					//Debug.Log(wordData.Length);
 					int numSyms = int.Parse(wordData[1]);
 					List<string> synonyms = new List<string>();
 					for (int s = 0; s < numSyms; s++)
 					{
-						line = streamReader.ReadLine();
-
+						line = lines[currentLine];
+						currentLine++;
 						linesRead++;
 						// + 1 here due to the end line character.
 						bytesRead += line.Length + 1;
@@ -61,8 +81,9 @@ public class DictionaryTester : MonoBehaviour
 						}
 					}
 					words[wordStr] = synonyms;
+					currentLine++;
 				}
-				else
+				/*else
 				{
 					Debug.Log("Loaded " + words.Count + " words");
 					loaded = true;
@@ -70,6 +91,7 @@ public class DictionaryTester : MonoBehaviour
 					Debug.Log("Lines " + linesRead);
 					break;
 				}
+				*/
 			}
 		}
 	}
