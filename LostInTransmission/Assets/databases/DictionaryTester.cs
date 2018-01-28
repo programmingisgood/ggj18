@@ -18,15 +18,29 @@ public class DictionaryTester : MonoBehaviour
 	private int linesRead = 0;
 	private int totalBytes;
 
+	public static Stream GenerateStreamFromString(string s)
+	{
+		MemoryStream stream = new MemoryStream();
+		StreamWriter writer = new StreamWriter(stream);
+		writer.Write(s);
+		writer.Flush();
+		stream.Position = 0;
+		return stream;
+	}
+
 	void Start()
 	{
-		string filePath = Path.Combine(Application.dataPath, "th_en_US_new.dat");
+		TextAsset myData = Resources.Load("th_en_US_new") as TextAsset;
+		Stream stream = GenerateStreamFromString(myData.text);
+		streamReader = new StreamReader(stream);
+		/*string filePath = Path.Combine(Application.dataPath, "th_en_US_new.dat");
 		FileStream fileStream = File.Open(filePath, FileMode.Open, FileAccess.Read);
 		BufferedStream bs = new BufferedStream(fileStream);
-		streamReader = new StreamReader(bs);
+		streamReader = new StreamReader(bs);*/
 
-		FileInfo fileInfo = new FileInfo(filePath);
-   		totalBytes = (int) fileInfo.Length;
+		//FileInfo fileInfo = new FileInfo(filePath);
+   		//totalBytes = (int) fileInfo.Length;
+		totalBytes = myData.text.Length;
 	}
 
 	void Update()

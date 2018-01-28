@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 222935837165920486}
   - component: {fileID: 114347329109803880}
   - component: {fileID: 114262838522220584}
+  - component: {fileID: 114898739604585866}
   m_Layer: 5
   m_Name: BoxPanel
   m_TagString: Untagged
@@ -1022,6 +1023,19 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114898739604585866
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1763026226065974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1254083943, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 2
+  m_AspectRatio: 0.5631229
 --- !u!114 &114913106191830636
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -23,6 +23,18 @@ public class Censor : MonoBehaviour
 	private string censorText = "[CENSORED]";
 	private string comradeText = "comrade";
 
+	public void Start()
+	{
+	}
+
+	public void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			Application.Quit();
+		}
+	}
+
 	public string CleanMessage(string message, List<string> excludeWords)
 	{
 		Message messageInHistory = new Message();
