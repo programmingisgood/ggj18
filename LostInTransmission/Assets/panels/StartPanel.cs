@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class StartPanel : MonoBehaviour
 {
+	public DictionaryTester dict;
 	public PlayerDB playerDB;
 	public GameObject writePanel;
 	public Button begin;
 	public Text beginText;
 	public InputField name1;
 	public InputField name2;
+	public Text loadingText;
 
 	void Start()
 	{
@@ -35,13 +37,13 @@ public class StartPanel : MonoBehaviour
 
 	void TaskOnPlayer1NameChanged(string newText)
 	{
-		playerDB.SetPlayer1Name(newText);
+		playerDB.SetPlayer2Name(newText);
 		CheckReadyToPlay();
 	}
 
 	void TaskOnPlayer2NameChanged(string newText)
 	{
-		playerDB.SetPlayer2Name(newText);
+		playerDB.SetPlayer1Name(newText);
 		CheckReadyToPlay();
 	}
 
@@ -57,7 +59,12 @@ public class StartPanel : MonoBehaviour
 
 		if (readyToPlay)
 		{
-			beginText.text = "Very good. " + name1.text + ", please avert your vision and then we may";
+			beginText.text = "Very good. " + name2.text + ", please avert your vision and then we may";
 		}
+	}
+
+	void Update()
+	{
+		loadingText.text = (int) (dict.GetLoadingProgress() * 100f) + "%";
 	}
 }

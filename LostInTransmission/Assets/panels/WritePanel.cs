@@ -5,47 +5,51 @@ using UnityEngine.UI;
 
 public class WritePanel : MonoBehaviour
 {
+	public Censor censor;
 	public DictionaryTester dict;
 	public ItemDB itemDB;
 	public PlayerDB playerDB;
 	public GameObject passToPanel;
-	public List<InputField> inputFields;
+	public InputField inputField;
 	public List<GameObject> goodItems;
 	public List<GameObject> returnedGoodItems;
 	public List<GameObject> badItems;
 	public List<GameObject> trashItems;
 	public Button submit;
-
-	public int maxWords = 5;
-
-	public float chanceOfRemoval = 0.5f;
-	public float chanceOfSwap = 0.5f;
-	public float chanceOfSynonym = 0.3f;
+	public Text wordLimitCurrText;
+	public Text wordLimitMax;
 
 	void Start()
 	{
 		submit.onClick.AddListener(TaskOnClick);
-
-		for (int i = 0; i < inputFields.Count; i++)
-		{
-			inputFields[i].onValueChanged.AddListener(InputChanged);
-		}
+		inputField.onValueChanged.AddListener(InputChanged);
 	}
 
 	void InputChanged(string input)
 	{
 		// Check if we should enable the submit button.
-		int numWithText = 0;
-		for (int i = 0; i < inputFields.Count; i++)
+		int numOfWords = 0;
+		string[] words = inputField.text.Split(' ');
+		for (int i = 0; i < words.Length; i++)
 		{
-			if (inputFields[i].text.Length > 0)
+			string word = words[i];
+			word = word.Trim();
+			if (word.Length > 2)
 			{
-				numWithText++;
+				numOfWords++;
 			}
 		}
 
-		if (numWithText == inputFields.Count)
+		wordLimitCurrText.text = numOfWords.ToString();
+		wordLimitMax.text = "/" + censor.maxWords;
+		wordLimitCurrText.color = Color.black;
+
+		if (numOfWords >= censor.maxWords)
 		{
+			if (numOfWords > censor.maxWords)
+			{
+				wordLimitCurrText.color = Color.red;
+			}
 			submit.gameObject.SetActive(true);
 		}
 	}
@@ -62,12 +66,18 @@ public class WritePanel : MonoBehaviour
 			trashItems[t].SetActive(false);
 		}
 
+		for (int r = 0; r < returnedGoodItems.Count; r++)
+		{
+			returnedGoodItems[r].SetActive(false);
+		}
+
 		submit.gameObject.SetActive(false);
 
-		for (int i = 0; i < inputFields.Count; i++)
-		{
-			inputFields[i].text = "";
-		}
+		inputField.text = "";
+
+		wordLimitCurrText.color = Color.black;
+		wordLimitCurrText.text = "0";
+		wordLimitMax.text = "/" + censor.maxWords;
 
 		UnpackBox();
 	}
@@ -78,8 +88,8 @@ public class WritePanel : MonoBehaviour
 		{
 			GameObject goodItemGO = goodItems[g];
 			goodItemGO.SetActive(true);
-			Text goodItem = goodItemGO.GetComponentsInChildren<Text>()[0];
-			goodItem.text = itemDB.GetGoodItem(g).name;
+			Image goodItem = goodItemGO.GetComponentsInChildren<Image>()[0];
+			goodItem.sprite = itemDB.GetGoodItem(g).sprite;
 		}
 	}
 
@@ -89,8 +99,8 @@ public class WritePanel : MonoBehaviour
 		{
 			GameObject badItemGO = badItems[b];
 			badItemGO.SetActive(true);
-			Text badItem = badItemGO.GetComponentsInChildren<Text>()[0];
-			badItem.text = itemDB.GetBadItem(b).name;
+			Image badItem = badItemGO.GetComponentsInChildren<Image>()[0];
+			badItem.sprite = itemDB.GetBadItem(b).sprite;
 		}
 	}
 
@@ -100,12 +110,13 @@ public class WritePanel : MonoBehaviour
 		for (int i = 0; i < boxItems.Count; i++)
 		{
 			ItemDB.Item boxItem = boxItems[i];
-			int goodIndex = CheckItemInList(boxItem, goodItems);
-			int badIndex = CheckItemInList(boxItem, badItems);
+			int goodIndex = CheckItemInList(boxItem, itemDB.GetGoodItems());
+			int badIndex = CheckItemInList(boxItem, itemDB.GetBadItems());
 			if (goodIndex != -1)
 			{
 				goodItems[goodIndex].SetActive(false);
-				returnedGoodItems[goodIndex].GetComponentsInChildren<Text>()[0].text = boxItem.name;
+				returnedGoodItems[goodIndex].SetActive(true);
+				returnedGoodItems[goodIndex].GetComponentsInChildren<Image>()[0].sprite = boxItem.sprite;
 			}
 			else if (badIndex != -1)
 			{
@@ -119,7 +130,7 @@ public class WritePanel : MonoBehaviour
 					if (!trashItem.activeSelf)
 					{
 						trashItem.SetActive(true);
-						trashItem.GetComponentsInChildren<Text>()[0].text = boxItem.name;
+						trashItem.GetComponentsInChildren<Image>()[0].sprite = boxItem.sprite;
 						break;
 					}
 				}
@@ -127,11 +138,11 @@ public class WritePanel : MonoBehaviour
 		}
 	}
 
-	int CheckItemInList(ItemDB.Item checkItem, List<GameObject> items)
+	int CheckItemInList(ItemDB.Item checkItem, List<ItemDB.Item> items)
 	{
 		for (int i = 0; i < items.Count; i++)
 		{
-			if (items[i].GetComponentsInChildren<Text>()[0].text == checkItem.name)
+			if (items[i].name == checkItem.name)
 			{
 				return i;
 			}
@@ -142,77 +153,15 @@ public class WritePanel : MonoBehaviour
 
 	void TaskOnClick()
 	{
-		List<string> wordsList = new List<string>();
-		for (int i = 0; i < inputFields.Count; i++)
+		List<ItemDB.Item> items = itemDB.GetGameItems();
+		List<string> itemStrs = new List<string>();
+		foreach (ItemDB.Item item in items)
 		{
-			wordsList.Add(inputFields[i].text.Trim());
+			itemStrs.Add(item.name);
 		}
 
-		while (wordsList.Count > maxWords)
-		{
-			int trashIndex = Random.Range(0, wordsList.Count);
-			Debug.Log("Too many, trashing " + wordsList[trashIndex]);
-			wordsList.RemoveAt(trashIndex);
-		}
-
-		// Verify each word is a real word.
-		for (int w = wordsList.Count - 1; w >= 0; w--)
-		{
-			if (!dict.GetIsWordValid(wordsList[w]))
-			{
-				Debug.Log("Removing invalid word " + wordsList[w]);
-				wordsList.RemoveAt(w);
-			}
-		}
-
-		if (wordsList.Count > 0 && Random.value <= chanceOfRemoval)
-		{
-			int removeIndex = Random.Range(0, wordsList.Count);
-			Debug.Log("Chance: Removing " + wordsList[removeIndex]);
-			wordsList.RemoveAt(removeIndex);
-		}
-
-		if (wordsList.Count > 0 && Random.value <= chanceOfSwap)
-		{
-			int oldIndex = Random.Range(0, wordsList.Count);
-			int newIndex = Random.Range(0, wordsList.Count);
-			if (wordsList.Count > 1)
-			{
-				while (newIndex == oldIndex)
-				{
-					newIndex = Random.Range(0, wordsList.Count);
-				}
-				Debug.Log("Chance: Swapping " + wordsList[oldIndex]);
-				string oldWord = wordsList[oldIndex];
-				wordsList.RemoveAt(oldIndex);
-				wordsList.Insert(newIndex, oldWord);
-			}
-		}
-
-		if (wordsList.Count > 0)
-		{
-			for (int w = 0; w < wordsList.Count; w++)
-			{
-				if (Random.value <= chanceOfSynonym)
-				{
-					string word = wordsList[w];
-					List<string> synonyms = dict.GetWordSynonyms(word);
-					if (synonyms != null)
-					{
-						string randomSyn = synonyms[Random.Range(0, synonyms.Count)];
-						Debug.Log("Chance: " + word + " becomes " + randomSyn);
-						wordsList[w] = randomSyn;
-					}
-				}
-			}
-		}
-
-		string message = "";
-		for (int f = 0; f < wordsList.Count; f++)
-		{
-			message += wordsList[f] + " ";
-		}
-		playerDB.SetMessage(message);
+		string cleaned = censor.CleanMessage(inputField.text, itemStrs);
+		playerDB.SetMessage(cleaned);
 
 		gameObject.SetActive(false);
 		passToPanel.SetActive(true);
