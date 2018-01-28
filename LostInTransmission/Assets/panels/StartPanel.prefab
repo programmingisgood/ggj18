@@ -488,7 +488,7 @@ MonoBehaviour:
     m_FontSize: 43
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 58
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -496,9 +496,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.85
-  m_Text: 'I am in need of your help.
+  m_Text: 'Need you to send things.
 
-    Please assist our efforts.'
+    Choose words carefully.
+
+    Government is watching.'
 --- !u!114 &114311002633312736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -618,7 +620,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.85
-  m_Text: Very good. Player 1, please avert your vision and then we may
+  m_Text: Look away, Player 1. You will get a letter soon.
 --- !u!114 &114568197500015356
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -684,7 +686,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.85
-  m_Text: Dear
+  m_Text: DEAR
 --- !u!114 &114683110489719192
 MonoBehaviour:
   m_ObjectHideFlags: 1
