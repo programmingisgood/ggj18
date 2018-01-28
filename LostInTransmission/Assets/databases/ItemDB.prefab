@@ -60,8 +60,6 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 583d8bf54b65b46e9a08fab895555448, type: 3}
   - name: pencil
     sprite: {fileID: 21300000, guid: cafdb43b8ccc942ec92304e1c0aea723, type: 3}
-  - name: tshirt
-    sprite: {fileID: 21300000, guid: 463ec923de63b43c98d6df1ff773d41c, type: 3}
   - name: banana
     sprite: {fileID: 21300000, guid: 3ee20468ac7f948deae50c770b2199f9, type: 3}
   - name: joystick

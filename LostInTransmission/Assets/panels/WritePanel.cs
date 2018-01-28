@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class WritePanel : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class WritePanel : MonoBehaviour
 	public Text wordLimitCurrText;
 	public Text wordLimitMax;
 
+	private bool gameOver = false;
+	private bool playersWon = false;
+
 	void Start()
 	{
 		submit.onClick.AddListener(TaskOnClick);
@@ -29,23 +33,13 @@ public class WritePanel : MonoBehaviour
 	{
 		// Check if we should enable the submit button.
 		int numOfChars = inputField.text.Length;
-		/*string[] words = inputField.text.Split(' ');
-		for (int i = 0; i < words.Length; i++)
-		{
-			string word = words[i];
-			word = word.Trim();
-			if (word.Length > 2)
-			{
-				numOfWords++;
-			}
-		}*/
 
 		wordLimitCurrText.text = numOfChars.ToString();
 		wordLimitMax.text = "/" + censor.maxChars;
 		wordLimitCurrText.color = (numOfChars > censor.maxChars) ? Color.red : Color.black;
 
 		bool showButton = numOfChars > 0 && numOfChars <= censor.maxChars;
-		submit.gameObject.SetActive(showButton);
+		submit.gameObject.SetActive(showButton || gameOver);
 	}
 
 	void OnEnable()
@@ -76,6 +70,8 @@ public class WritePanel : MonoBehaviour
 		wordLimitMax.text = "/" + censor.maxChars;
 
 		UnpackBox();
+
+		CheckGameOver();
 	}
 
 	void DisplayGoodItems()
@@ -103,6 +99,7 @@ public class WritePanel : MonoBehaviour
 	void UnpackBox()
 	{
 		List<ItemDB.Item> boxItems = itemDB.GetItemsInBoxPreviously();
+		int numGoodInBox = 0;
 		for (int i = 0; i < boxItems.Count; i++)
 		{
 			ItemDB.Item boxItem = boxItems[i];
@@ -110,6 +107,7 @@ public class WritePanel : MonoBehaviour
 			int badIndex = CheckItemInList(boxItem, itemDB.GetBadItems());
 			if (goodIndex != -1)
 			{
+				numGoodInBox++;
 				goodItems[goodIndex].SetActive(false);
 				returnedGoodItems[goodIndex].SetActive(true);
 				returnedGoodItems[goodIndex].GetComponentsInChildren<Image>()[0].sprite = boxItem.sprite;
@@ -117,6 +115,8 @@ public class WritePanel : MonoBehaviour
 			else if (badIndex != -1)
 			{
 				badItems[badIndex].GetComponent<Image>().color = Color.red;
+				gameOver = true;
+				playersWon = false;
 			}
 			else
 			{
@@ -131,6 +131,36 @@ public class WritePanel : MonoBehaviour
 					}
 				}
 			}
+		}
+
+		if (!gameOver && numGoodInBox == 6)
+		{
+			gameOver = true;
+			playersWon = true;
+		}
+	}
+
+	void CheckGameOver()
+	{
+		if (gameOver)
+		{
+			submit.transform.Find("Text").GetComponent<Text>().text = "Restart";
+			submit.gameObject.SetActive(true);
+			Text inputText = inputField.transform.Find("Text").GetComponent<Text>();
+			inputText.fontSize = 20;
+			inputText.resizeTextForBestFit = false;
+			inputField.text = playersWon ? "Success!" : "Illegal Package!";
+
+			for (int h = 0; h < censor.messageHistory.Count; h++)
+			{
+				Censor.Message currMessage = censor.messageHistory[h];
+				inputField.text += "\n\nMessage " + (h + 1);
+				inputField.text += "\n---Before---\n" + currMessage.beforeCensor;
+				inputField.text += "\n---After---\n" + currMessage.afterCensor;
+			}
+
+			wordLimitCurrText.gameObject.SetActive(false);
+			wordLimitMax.gameObject.SetActive(false);
 		}
 	}
 
@@ -149,6 +179,12 @@ public class WritePanel : MonoBehaviour
 
 	void TaskOnClick()
 	{
+		if (gameOver)
+		{
+			SceneManager.LoadScene("brian");
+			return;
+		}
+
 		List<ItemDB.Item> items = itemDB.GetGameItems();
 		List<string> itemStrs = new List<string>();
 		foreach (ItemDB.Item item in items)

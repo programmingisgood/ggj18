@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 222753313554119856}
   - component: {fileID: 114447923745186314}
   - component: {fileID: 114824064888535666}
+  - component: {fileID: 114518529391194470}
   m_Layer: 5
   m_Name: PassToPanel
   m_TagString: Untagged
@@ -135,6 +136,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114518529391194470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1908343368765400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1254083943, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 2
+  m_AspectRatio: 0.5631229
 --- !u!114 &114628882695632640
 MonoBehaviour:
   m_ObjectHideFlags: 1

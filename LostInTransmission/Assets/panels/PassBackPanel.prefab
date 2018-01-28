@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 222956850033589296}
   - component: {fileID: 114326903494567052}
   - component: {fileID: 114397323376557100}
+  - component: {fileID: 114169211336606578}
   m_Layer: 5
   m_Name: PassBackPanel
   m_TagString: Untagged
@@ -114,6 +115,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Pass to '
+--- !u!114 &114169211336606578
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1332167970283950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1254083943, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 2
+  m_AspectRatio: 0.5631229
 --- !u!114 &114263040955742746
 MonoBehaviour:
   m_ObjectHideFlags: 1
