@@ -370,10 +370,6 @@ Prefab:
       propertyPath: writePanel
       value: 
       objectReference: {fileID: 1647129087}
-    - target: {fileID: 1819523343961498, guid: f7c4a144ef56e604294f83ac1ae2bd9a, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f7c4a144ef56e604294f83ac1ae2bd9a, type: 2}
   m_IsPrefabParent: 0
@@ -1229,7 +1225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

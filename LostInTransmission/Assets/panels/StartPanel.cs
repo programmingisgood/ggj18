@@ -27,6 +27,9 @@ public class StartPanel : MonoBehaviour
 	{
 		begin.gameObject.SetActive(false);
 		beginText.gameObject.SetActive(false);
+
+		name2.Select();
+ 		name2.ActivateInputField();
 	}
 
 	void TaskOnBegin()

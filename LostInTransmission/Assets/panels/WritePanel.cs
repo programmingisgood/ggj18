@@ -74,6 +74,8 @@ public class WritePanel : MonoBehaviour
 		submit.gameObject.SetActive(false);
 
 		inputField.text = "";
+		inputField.Select();
+ 		inputField.ActivateInputField();
 
 		wordLimitCurrText.color = Color.black;
 		wordLimitCurrText.text = "0";
