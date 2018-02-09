@@ -40,7 +40,7 @@ public class Censor : MonoBehaviour
 		Message messageInHistory = new Message();
 		messageInHistory.beforeCensor = message;
 
-		List<string> wordsList = new List<string>(message.Split(' '));
+		List<string> wordsList = new List<string>(message.Split(null));
 		for (int i = wordsList.Count - 1; i >= 0; i--)
 		{
 			wordsList[i] = wordsList[i].ToLower();
@@ -52,20 +52,6 @@ public class Censor : MonoBehaviour
 				wordsList.RemoveAt(i);
 			}
 		}
-
-		// Verify length of message.
-		/*int numberToRemove = wordsList.Count - maxWords;
-		while (numberToRemove > 0)
-		{
-			int trashIndex = Random.Range(0, wordsList.Count);
-			while (wordsList[trashIndex] == censorText)
-			{
-				trashIndex = Random.Range(0, wordsList.Count);
-			}
-			Debug.Log("Too many, trashing " + wordsList[trashIndex]);
-			wordsList[trashIndex] = censorText;
-			numberToRemove--;
-		}*/
 
 		// Verify each word is a real word.
 		for (int w = wordsList.Count - 1; w >= 0; w--)

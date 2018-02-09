@@ -17,8 +17,7 @@ public class WritePanel : MonoBehaviour
 	public List<GameObject> badItems;
 	public List<GameObject> trashItems;
 	public Button submit;
-	public Text wordLimitCurrText;
-	public Text wordLimitMax;
+	public Text charLimitText;
 
 	private bool gameOver = false;
 	private bool playersWon = false;
@@ -33,10 +32,8 @@ public class WritePanel : MonoBehaviour
 	{
 		// Check if we should enable the submit button.
 		int numOfChars = inputField.text.Length;
-
-		wordLimitCurrText.text = numOfChars.ToString();
-		wordLimitMax.text = "/" + censor.maxChars;
-		wordLimitCurrText.color = (numOfChars > censor.maxChars) ? Color.red : Color.black;
+		charLimitText.text = numOfChars.ToString() + "/" + censor.maxChars.ToString();
+		charLimitText.color = numOfChars > censor.maxChars ? Color.red : Color.black;
 
 		bool showButton = numOfChars > 0 && numOfChars <= censor.maxChars;
 		submit.gameObject.SetActive(showButton || gameOver);
@@ -65,9 +62,9 @@ public class WritePanel : MonoBehaviour
 		inputField.Select();
  		inputField.ActivateInputField();
 
-		wordLimitCurrText.color = Color.black;
-		wordLimitCurrText.text = "0";
-		wordLimitMax.text = "/" + censor.maxChars;
+		charLimitText.gameObject.SetActive(true);
+		charLimitText.text = "0/" + censor.maxChars;
+		charLimitText.color = Color.black;
 
 		UnpackBox();
 
@@ -159,8 +156,7 @@ public class WritePanel : MonoBehaviour
 				inputField.text += "\n---After---\n" + currMessage.afterCensor;
 			}
 
-			wordLimitCurrText.gameObject.SetActive(false);
-			wordLimitMax.gameObject.SetActive(false);
+			charLimitText.gameObject.SetActive(false);
 		}
 	}
 

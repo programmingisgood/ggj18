@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayAudioClip : MonoBehaviour 
+public class PlayAudioClip : MonoBehaviour
 {
-	private AudioSource audio;
+	private AudioSource audioSource;
 
-	void Start () 
+	void Start ()
 	{
-		audio = this.GetComponent<AudioSource>();
+		audioSource = this.GetComponent<AudioSource>();
 	}
-	
+
 	public void playAudio()
 	{
-		audio.PlayOneShot(audio.clip);
+		audioSource.PlayOneShot(audioSource.clip);
 	}
 }
